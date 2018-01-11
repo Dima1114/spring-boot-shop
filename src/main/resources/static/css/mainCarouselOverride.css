@@ -1,0 +1,68 @@
+@media (-webkit-transform-3d) {
+    .carousel-item-next.carousel-item-left, .carousel-item-prev.carousel-item-right {
+        -webkit-transform: translate3d(0, 0, 0);
+        transform: translate3d(0, 0, 0)
+    }
+
+    .active.carousel-item-right, .carousel-item-next {
+        -webkit-transform: translate3d(33.33333%, 0, 0);
+        transform: translate3d(33.33333%, 0, 0)
+    }
+
+    .active.carousel-item-left, .carousel-item-prev {
+        -webkit-transform: translate3d(-33.33333%, 0, 0);
+        transform: translate3d(-33.33333%, 0, 0)
+    }
+}
+
+@supports ((-webkit-transform:translate3d(0,0,0)) or (transform:translate3d(0,0,0))) {
+    .carousel-item-next.carousel-item-left, .carousel-item-prev.carousel-item-right {
+        -webkit-transform: translate3d(0, 0, 0);
+        transform: translate3d(0, 0, 0)
+    }
+
+    .active.carousel-item-right, .carousel-item-next {
+        -webkit-transform: translate3d(33.33333%, 0, 0);
+        transform: translate3d(33.33333%, 0, 0)
+    }
+
+    .active.carousel-item-left, .carousel-item-prev {
+        -webkit-transform: translate3d(-33.33333%, 0, 0);
+        transform: translate3d(-33.33333%, 0, 0)
+    }
+}
+
+/* css for big main slider*/
+@media (-webkit-transform-3d) {
+    #carouselExampleIndicators .carousel-item-next.carousel-item-left, #carouselExampleIndicators .carousel-item-prev.carousel-item-right {
+        -webkit-transform: translate3d(0, 0, 0);
+        transform: translate3d(0, 0, 0)
+    }
+
+    #carouselExampleIndicators .active.carousel-item-right, #carouselExampleIndicators .carousel-item-next {
+        -webkit-transform: translate3d(100%, 0, 0);
+        transform: translate3d(100%, 0, 0)
+    }
+
+    #carouselExampleIndicators .active.carousel-item-left, #carouselExampleIndicators .carousel-item-prev {
+        -webkit-transform: translate3d(-100%, 0, 0);
+        transform: translate3d(-100%, 0, 0)
+    }
+}
+
+@supports ((-webkit-transform:translate3d(0,0,0)) or (transform:translate3d(0,0,0))) {
+    #carouselExampleIndicators .carousel-item-next.carousel-item-left, #carouselExampleIndicators .carousel-item-prev.carousel-item-right {
+        -webkit-transform: translate3d(0, 0, 0);
+        transform: translate3d(0, 0, 0)
+    }
+
+    #carouselExampleIndicators .active.carousel-item-right, #carouselExampleIndicators .carousel-item-next {
+        -webkit-transform: translate3d(100%, 0, 0);
+        transform: translate3d(100%, 0, 0)
+    }
+
+    #carouselExampleIndicators .active.carousel-item-left, #carouselExampleIndicators .carousel-item-prev {
+        -webkit-transform: translate3d(-100%, 0, 0);
+        transform: translate3d(-100%, 0, 0)
+    }
+}

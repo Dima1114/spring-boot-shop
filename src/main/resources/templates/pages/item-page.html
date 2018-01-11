@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head>
+
+    <meta name="base-url" id="baseUrl" th:content="@{/}" charset="UTF-8"/>
+    <title>FreeRide</title>
+
+    <!-- Bootstrap core CSS -->
+    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet"/>
+    <link th:href="@{/css/bootstrap-grid.min.css}" rel="stylesheet"/>
+    <link th:href="@{/css/bootstrap-reboot.min.css}" rel="stylesheet"/>
+
+    <!-- Custom styles for this template -->
+    <link th:href="@{/css/background.css}" rel="stylesheet"/>
+    <link th:href="@{/css/login.css}" rel="stylesheet"/>
+
+</head>
+<body>
+
+<div class="wrapper">
+    <div class="content">
+        <!-- Navigation -->
+        <th:block th:include="includes/navigation :: main-nav"/>
+
+        <!-- Page Content -->
+        <div class="container">
+
+            <div class="row">
+
+                <div class="col-lg-3">
+
+                    <!--Categories-->
+                    <th:block th:include="includes/categories :: main-categories"/>
+
+                </div>
+
+                <div class="col-lg-9">
+
+                    <div class="card mb-4 mt-4">
+                        <div class="row">
+                            <div class="col-6 pt-4 pb-3">
+                                <img class="card-img-top img-fluid pl-3" th:src="@{|/items/${item.id}/image|}" alt=""/>
+                            </div>
+                            <div class="card-body col-6 pt-4 pb-3">
+                                <h3 class="card-title" th:text="${item.name}"></h3>
+                                <!--STARS-->
+                                <ul class="list-inline">
+                                    <th:block th:each="star : ${#numbers.sequence(1,item.rating)}">
+                                        <li class="list-inline-item"><h2 class="text-warning">&#9733;</h2></li>
+                                    </th:block>
+                                    <th:block th:each="star : ${#numbers.sequence(item.rating+1,5)}"
+                                              th:if="${item.rating &lt;= 4}">
+                                        <li class="list-inline-item"><h2 class="text-warning">&#9734;</h2></li>
+                                    </th:block>
+                                    <!--<span class="text-warning" >&#9733; &#9733; &#9733; &#9733; &#9734;</span>-->
+                                    <li class="list-inline-item"><h4 th:text="|${item.rating} stars|"></h4></li>
+                                </ul>
+                                <!--PRICE-->
+                                <span th:text="'Price'"></span>
+                                <h4 th:text="|$ ${item.price}|"></h4>
+                                <!--SIZES-->
+                                <div>
+                                    <p th:text="'Available sizes:'"></p>
+                                    <div class="btn-group pb-4" data-toggle="buttons">
+                                        <th:block th:each="size : ${itemSizes}"
+                                                  th:if="${itemSizes.size()}&lt;5">
+                                            <label class="btn btn-primary">
+                                                <input type="radio" name="sizeOptions" th:value="${size.id}"
+                                                       autocomplete="off"
+                                                       class="sizeOption" th:text="${size.size}"
+                                                       th:onchange="|undisableRadio()|"/>
+                                            </label>
+                                        </th:block>
+                                        <th:block th:if="${itemSizes.size()}&gt;4">
+                                            <select class="custom-select mb-2 mr-sm-2 mb-sm-0 col-12"
+                                                    id="sizeSelector" th:onchange="|undisableSelect()|">
+                                                <option value="" th:text="'Choose size'"></option>
+                                                <th:block th:each="size : ${itemSizes}">
+                                                    <option th:value="${size.id}"
+                                                            th:text="${size.size}"></option>
+                                                </th:block>
+                                            </select>
+                                        </th:block>
+                                    </div>
+                                </div>
+                                <!--CART & ORDER-->
+                                <th:block th:if="${itemSizes.size()}!=0">
+                                    <div class="btn-group" sec:authorize="isAuthenticated()">
+                                        <button class="shopping btn btn-primary disabled" th:text="'Add to Cart'"
+                                                th:onclick="|addToCart(${item.id})|"></button>
+                                        <button class="shopping btn btn-success disabled"
+                                                th:text="'Order Now'"></button>
+                                    </div>
+                                    <p class="text-danger" sec:authorize="!isAuthenticated()"
+                                       th:text="'You need to be authorized to add to cart'"></p>
+                                </th:block>
+                                <th:block th:unless="${itemSizes.size()}!=0">
+                                    <p class="text-danger" th:text="'Sorry, this product is not available'"></p>
+                                </th:block>
+
+                            </div>
+                        </div>
+                    </div>
+                    <!--DESCRIPTION-->
+                    <div class="card mb-4">
+                        <div class="col-6 pt-3 pb-3 rounded" style="background-color: #fff">
+                            <h4 th:text="'Product description'"></h4>
+                            <p class="card-text" th:text="${item.description}"></p>
+                        </div>
+                    </div>
+
+                    <!-- /.card -->
+
+                    <!--COMMENTS-->
+                    <div class="card card-outline-secondary my-4" style="background-color: #fff">
+                        <h5 class="card-header" th:text="'Product Comments'"></h5>
+                        <div class="card-body">
+                            <div class="p-3" th:if="${itemComments.size() == 0}">
+                                <span th:text="|There are no comments yet...|"></span>
+                                <span th:text="|Be the first|"></span>
+                            </div>
+
+                            <div class="p-2 comment-btns" sec:authorize="isAuthenticated()">
+                                <button class="btn btn-success" id="add-comment" onclick="showArea()"
+                                        th:text="'Leave a Comment'"></button>
+                            </div>
+                            <div class="comment-area-div row p-3" style="display:none">
+                                <div class="col-10">
+                                    <textarea rows="5" class="comment-area col-12"></textarea>
+                                </div>
+                                <div class="col-12">
+                                    <button th:onclick="|postComment(${item.id})|" class="btn btn-success" id="send"
+                                            th:text="'Add comment'"></button>
+                                    <button onclick="hideArea()" class="btn btn-danger" id="cancel"
+                                            th:text="'Cancel'"></button>
+                                </div>
+                            </div>
+
+                            <th:block th:each="comment : ${itemComments}">
+                                <div class="px-4 row">
+                                    <div class="col-1">
+                                        <img class="d-flex align-self-center pt-3 w-100"
+                                             th:src="@{|/profile/image/${comment.user.id}|}"/>
+                                    </div>
+                                    <div class="col-11">
+                                        <p th:text="${comment.text}"></p>
+                                        <small class="text-muted"
+                                               th:text="|Posted by ${comment.user.username}.|"></small>
+                                        <small class="text-muted"
+                                               th:text="|Date: ${comment.addingDate.toLocalDate()}|"></small>
+                                        <div class="p-2" sec:authorize="hasAuthority('admin')">
+                                            <button class="btn btn-warning" th:onclick="|deleteComment(${comment.id})|"
+                                                    th:text="'Delete Comment'"></button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <hr/>
+                            </th:block>
+
+                        </div>
+                    </div>
+                    <!-- /.card -->
+
+                </div>
+                <!-- /.col-lg-9 -->
+
+            </div>
+
+        </div>
+        <!-- /.container -->
+    </div>
+    <div class="footer">
+        <!-- Footer -->
+        <th:block th:include="includes/footer :: main-footer"/>
+    </div>
+</div>
+<!-- Bootstrap core JavaScript -->
+<script th:src="@{/js/jquery.js}"></script>
+<script th:src="@{/js/bootstrap.min.js}"></script>
+<script th:src="@{/js/bootstrap.bundle.js}"></script>
+
+<script th:src="@{/js/undisable-cart-buttons.js}"></script>
+<script th:src="@{/js/dropdown-fix.js}"></script>
+<script th:src="@{/js/comment.js}"></script>
+
+<!--Adding item to cart AJAX-->
+<script th:src="@{/js/cart.js}"></script>
+
+</body>
+
+</html>

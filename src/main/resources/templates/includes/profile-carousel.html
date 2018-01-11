@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+</head>
+<body>
+
+<th:block th:fragment="profile-carousel" th:with="cartTotal=${0}">
+
+    <th:block th:if="${cartAvailabilities.isEmpty()}" >
+        <h1 class="pl-5" th:text="'Cart is empty'" style="color: red"></h1>
+    </th:block>
+
+
+    <div class="col-md-12 mb-4">
+        <div class="carousel slide" id="myCarousel"
+             th:attrappend="data-ride=${cartAvailabilities.size()&gt; 4}?'carousel'" data-interval="5000">
+            <div class="carousel-inner">
+
+                <!-- The first item is Active-->
+                <!--All other items are not active-->
+                <th:block th:each="availability,itr : ${cartAvailabilities}" th:with="item=${availability.getItem()}">
+                    <th:block th:include="includes/items-carousel :: list-carousel"/>
+                </th:block>
+
+            </div>
+
+            <th:block th:if="${cartAvailabilities.size()}&gt;4">
+                <a class="carousel-control-prev btn btn-primary" style="width:5%;margin-left:-5%" href="#myCarousel"
+                   role="button" data-slide="prev">
+                    <i class="fa fa-chevron-left fa-lg text-muted"></i>
+                </a>
+                <a class="carousel-control-next btn btn-primary" style="width:5%;margin-right:-5%" href="#myCarousel"
+                   role="button" data-slide="next">
+                    <i class="fa fa-chevron-right fa-lg text-muted"></i>
+                </a>
+            </th:block>
+
+        </div>
+    </div>
+    <div class="clearfix" th:if="${!cartAvailabilities.isEmpty()}">
+        <div class="col-md-4 float-right mb-4">
+            <h1 th:text="'Cart Total'"></h1>
+            <h1 th:text="|$ ${cartTotal}|"></h1>
+        </div>
+        <div class="col-md-2 float-right mb-4">
+            <a class="btn btn-primary btn-lg" th:text="'Make Order'" href="#"></a>
+        </div>
+    </div>
+
+</th:block>
+
+</body>
+</html>

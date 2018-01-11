@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8"/>
+</head>
+<body>
+
+<th:block th:fragment="main-nav">
+
+    <nav class="navbar navbar-toggleable-md navbar-inverse bg-primary sticky-top">
+        <div class="container">
+            <a class="navbar-brand" th:href="@{/}" th:text="FreeRide"></a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
+                    aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/items/all}" th:text="Shop"></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/about}" th:text="About"></a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                           aria-expanded="false" href="#" th:text="'Profile'"><span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li sec:authorize="isAuthenticated()">
+                                <a class="dropdown-item" th:href="@{/profile}" th:text="'Profile'"></a>
+                            </li>
+                            <li sec:authorize="isAuthenticated()">
+                                <a class="dropdown-item" th:href="@{/logout}" th:text="'Logout'"></a>
+                            </li>
+                            <li role="separator" class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" th:href="@{/login}" th:text="'Login'"></a></li>
+                            <li><a class="dropdown-item" th:href="@{/registration}" th:text="'Registration'"></a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item" sec:authorize="hasAuthority('admin')">
+                        <a class="nav-link" th:href="@{/admin}" th:text="'Admin Panel'"></a>
+                    </li>
+                </ul>
+
+            </div>
+        </div>
+
+    </nav>
+    <div class="row justify-content-center fixed-top" style="top:30%">
+        <div class="alert alert-success align-middle" th:id="itemAdded" style="display:none">
+            <h4 class="" th:text="'Item was added to Cart'"></h4>
+        </div>
+    </div>
+</th:block>
+
+</body>
+</html>

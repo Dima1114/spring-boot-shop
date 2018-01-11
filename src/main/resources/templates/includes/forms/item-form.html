@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+>
+<head>
+    <meta charset="UTF-8"/>
+</head>
+<body>
+
+<th:block th:fragment="item-form">
+
+    <div class="col-12 mt-5 rounded" style="background-color: #fff">
+        <h3 th:text="'Product form'" class="text-center pt-3"></h3>
+        <form method="post" th:action="@{/admin/items/add}" th:object="${itemForm}" enctype="multipart/form-data">
+
+            <div class="form-group col-12" style="display: none">
+                <input type="text" class="form-control" id="id"  th:field="*{id}"/>
+            </div>
+
+            <div class="form-group col-12" th:classappend="${#fields.hasErrors('name')}?'has-danger'">
+                <label for="name" th:text="'Product name'"></label>
+                <input type="text" class="form-control" id="name" placeholder="Product name" th:field="*{name}"
+                       th:classappend="${#fields.hasErrors('name')}?'form-control-danger'"/>
+                <label class="form-control-feedback" for="name" th:if="${#fields.hasErrors('name')}"
+                       th:errors="*{name}"></label>
+            </div>
+
+            <div class="form-group col-12" th:classappend="${#fields.hasErrors('description')}?'has-danger'">
+                <label for="description" th:text="'Product description'"></label>
+                <textarea class="form-control" rows="5" id="description" placeholder="Product description"
+                          th:field="*{description}" th:classappend="${#fields.hasErrors('description')}?'form-control-danger'"></textarea>
+                <label class="form-control-feedback" for="description" th:if="${#fields.hasErrors('description')}"
+                       th:errors="*{description}"></label>
+            </div>
+
+            <div class="form-group  col-12" th:classappend="${#fields.hasErrors('price')}?'has-danger'">
+                <label for="price" th:text="'Price'"></label>
+                <input type="number" class="form-control" name="price" id="price" value="0"
+                       min="0" max="1000" th:field="*{price}" th:classappend="${#fields.hasErrors('price')}?'form-control-danger'"/>
+                <label class="form-control-feedback" for="price" th:if="${#fields.hasErrors('price')}"
+                       th:errors="*{price}"></label>
+            </div>
+
+            <div class="form-group col-12" th:classappend="${#fields.hasErrors('brand')}?'has-danger'">
+                <label class="mr-sm-2 col-2" for="selectBrand" th:text="Brand"></label>
+                <select class="custom-select mb-2 mr-sm-2 mb-sm-0 col-10" id="selectBrand" th:field="*{brand}"
+                        th:classappend="${#fields.hasErrors('brand')}?'form-control-danger'">
+                    <option value="" th:text="'Choose brand'"></option>
+                    <th:block th:each="brand : ${brands}">
+                        <option th:value="${brand.name}" th:text="${brand.name}"></option>
+                    </th:block>
+                </select>
+                <br/>
+                <label class="form-control-feedback" for="selectBrand" th:if="${#fields.hasErrors('brand')}"
+                       th:errors="*{brand}"></label>
+            </div>
+
+            <div class="form-group col-12" th:classappend="${#fields.hasErrors('category')}?'has-danger'">
+                <label class="mr-sm-2 col-2" for="selectCategory" th:text="Category"></label>
+                <select class="custom-select mb-2 mr-sm-2 mb-sm-0 col-10" id="selectCategory" th:field="*{category}"
+                        th:classappend="${#fields.hasErrors('category')}?'form-control-danger'">
+                    <option value="" th:text="'Choose category'"></option>
+                    <th:block th:each="category : ${categories}">
+                        <option th:class="${category.sizeType}"
+                                th:value="${category.name}" th:text="${category.name}"></option>
+                    </th:block>
+                </select>
+                <br/>
+                <label class="form-control-feedback" for="selectCategory" th:if="${#fields.hasErrors('category')}"
+                       th:errors="*{category}"></label>
+            </div>
+
+            <div class="form-group col-12">
+                <p class="mr-sm-2 mb-0" th:text="Size"></p>
+                <p class="p-0 m-0">
+                    <small th:text="'Choose category at first'"></small>
+                </p>
+
+                <th:block th:each="size,itr : ${sizes}">
+                    <div class="row" th:classappend="|${size.type} sizeOption|" style="display: none">
+
+                        <div class="col-2 form-check">
+                            <label class="form-check-label" th:text="${size.size}">
+                                <input class="form-check-input" type="checkbox" th:value="${size.size}"
+                                       th:field="*{sizeQuantity.key}"/>
+                            </label>
+                        </div>
+                        <div class="col-3 p-1">
+                            <input class="form-control w-100 rounded" type="number" name="sizeQuantity"
+                                   min="0" max="1000" th:field="*{sizeQuantity[__${size.size}__]}"/>
+                        </div>
+                    </div>
+                </th:block>
+
+            </div>
+
+            <div class="form-group  col-12">
+                <label for="arrivalDate" th:text="'Arrival Date'"></label>
+                <input type="date" class="form-control" name="arrivalDate" id="arrivalDate"
+                       th:field="*{arrivalDate}"/>
+            </div>
+
+            <div class="col-5 p-3">
+                <div class="overlay hm-zoom" id="dvPreview">
+                    <img th:if="*{id}!=null" class="img-fluid w-100 rounded mb-3" th:src="@{|/items/*{id}/image|}"/>
+                    <img th:unless="*{id}!=null" class="img-fluid w-100 rounded mb-3" th:src="@{|/items/0/image|}"/>
+                </div>
+                <input id="fileupload" type="file" th:field="*{image}"/>
+
+            </div>
+
+            <div class="form-group col-12 pb-4">
+                <div class="col-6">
+                    <button th:if="*{id}!=null" type="submit" class="btn btn-primary" th:text="|Update Product|"></button>
+                    <button th:if="*{id}!=null" type="button" class="btn btn-danger" data-toggle="modal"
+                            data-target="#myModal" th:text="'Delete Product'"></button>
+                    <button th:unless="*{id}!=null" type="submit" class="btn btn-primary" th:text="|Add Product|"></button>
+                </div>
+            </div>
+
+            <!-- Modal -->
+            <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="myModalLabel">Modal title</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <p th:text="'Delete this product?'"></p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal" th:text="Close"></button>
+                            <a class="btn btn-primary"
+                                    th:text="Delete" th:href="|@{/admin/items/delete/}*{id}|"></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </form>
+    </div>
+
+
+</th:block>
+
+</body>
+</html>

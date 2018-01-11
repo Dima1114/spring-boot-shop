@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+>
+<head>
+    <meta charset="UTF-8"/>
+</head>
+<body>
+
+<th:block th:fragment="list-carousel">
+
+    <div class="carousel-item" th:id="${item.id}" th:classappend="${itr.index==0}?'active'">
+        <div class="pl-2 pr-2" th:classappend="${cartAvailabilities}? col-md-3 : col-md-4">
+            <!--Item body-->
+            <div class="card text-center h-100">
+                <a th:href="@{|/items/show/${item.id}|}">
+                    <img class="card-img-top mw-100 pt-2" style="max-height:145.7px"
+                         th:src="@{|/items/${item.id}/image|}" alt=""/></a>
+                <div class="card-block">
+                    <div style="height: 60px;">
+                        <h4 class="card-title">
+                            <a th:href="@{|/items/show/${item.id}|}" th:text="${item.name}"></a>
+                        </h4>
+                    </div>
+                    <h5 th:text="|$ ${item.price}|"></h5>
+                    <p th:if="${cartAvailabilities}" class="card-text" th:text="|Size: ${availability.size.size}|"></p>
+                    <p th:unless="${cartAvailabilities}" class="card-text"
+                       th:text="${#strings.abbreviate(item.description,30)}"></p>
+                    <button th:if="${cartAvailabilities}" class="btn btn-warning" th:text="'Remove from Cart'"
+                            th:onclick="|removeFromCart(${availability.id})|"></button>
+
+                </div>
+
+                <div class="card-footer">
+                    <small class="text-muted"
+                           th:text="|&#9733; &#9733; &#9733; &#9733; &#9734; ${item.rating} Stars|"></small>
+                </div>
+            </div>
+            <!--/Item body-->
+        </div>
+    </div>
+
+</th:block>
+
+
+</body>
+</html>

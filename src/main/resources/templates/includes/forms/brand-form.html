@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+</head>
+<body>
+
+<th:block th:fragment="brand-form">
+
+    <div class="col-12 mt-5 rounded" style="background-color: #fff">
+        <h3 th:text="'Brand form'" class="text-center pt-3"></h3>
+        <form method="post" th:action="@{/admin/brands/add}" th:object="${brandForm}">
+
+            <div class="form-group col-12" style="display: none">
+                <input type="text" class="form-control" id="id"  th:field="*{id}"/>
+            </div>
+
+            <div class="form-group col-12" th:classappend="${#fields.hasErrors('name')}?'has-danger'">
+                <label for="name" th:text="'Category name'"></label>
+                <input type="text" class="form-control" id="name" placeholder="Category name" th:field="*{name}"
+                       th:classappend="${#fields.hasErrors('name')}?'form-control-danger'"/>
+                <label class="form-control-feedback" for="name" th:if="${#fields.hasErrors('name')}"
+                       th:errors="*{name}"></label>
+            </div>
+
+            <div class="form-group col-12 pb-4">
+                <div class="col-12">
+                    <button type="submit" class="btn btn-primary" th:text="'Update Brand'"></button>
+                    <button type="button" class="btn btn-danger" data-toggle="modal"
+                            data-target="#myModal" th:text="'Delete Brand'"></button>
+                </div>
+            </div>
+
+            <!-- Modal -->
+            <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="myModalLabel">Modal title</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <p th:text="'Delete this brand?'"></p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal" th:text="Close"></button>
+                            <a class="btn btn-primary"
+                               th:text="Delete" th:href="|@{/admin/brands/delete/}*{id}|"></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+
+
+</th:block>
+
+</body>
+</html>

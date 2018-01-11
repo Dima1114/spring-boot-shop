@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta name="base-url" id="baseUrl" th:content="@{/}" charset="UTF-8"/>
+    <title>FreeRide - profile</title>
+    <!-- Bootstrap core CSS -->
+    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet"/>
+    <link th:href="@{/css/bootstrap-grid.min.css}" rel="stylesheet"/>
+    <link th:href="@{/css/bootstrap-reboot.min.css}" rel="stylesheet"/>
+    <link th:href="@{/css/mdb.min.css}" rel="stylesheet"/>
+
+    <link th:href="@{/css/background.css}" rel="stylesheet"/>
+    <link th:href="@{/css/profileCarouselOverride.css}" rel="stylesheet"/>
+
+    <style>
+        label {
+            font-size: 130%;
+        }
+    </style>
+
+</head>
+<body>
+
+<!-- Navigation -->
+<th:block th:include="includes/navigation :: main-nav"/>
+
+<!-- Page Content -->
+<div class="container">
+
+    <!-- Portfolio Item Heading -->
+    <!--<h1 class="mt-4 col-4 offset-3" th:text="|Profile|"></h1>-->
+
+    <!-- Portfolio Item Row -->
+    <div class="row">
+
+        <th:block th:include="includes/forms/profile-form :: profile-form"/>
+
+    </div>
+    <!-- /.row -->
+
+    <!-- Cart Items -->
+    <h3 class="my-4 pl-5" th:text="'Your Cart'"></h3>
+    <span id="itemsInRow" style="display: none" th:text="4"></span>
+
+    <th:block th:include="includes/profile-carousel :: profile-carousel"/>
+    <!-- /.row -->
+
+</div>
+<!-- /.container -->
+
+<!-- Footer -->
+<th:block th:include="includes/footer :: main-footer"/>
+
+<!-- Bootstrap core JavaScript -->
+<script th:src="@{/js/jquery.js}"></script>
+<script th:src="@{/js/bootstrap.min.js}"></script>
+<script th:src="@{/js/bootstrap.bundle.js}"></script>
+
+<script th:src="@{/js/profile-carousel.js}"></script>
+<script th:src="@{/js/image-preview.js}"></script>
+<script th:src="@{/js/bootstrap-fileselect.js}"></script>
+<script th:src="@{/js/dropdown-fix.js}"></script>
+<script>
+    $('#fileupload').fileselect();
+</script>
+<!--Adding item to cart AJAX-->
+<script th:src="@{/js/cart.js}"></script>
+
+</body>
+
+</html>

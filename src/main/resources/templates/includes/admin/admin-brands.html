@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+</head>
+<body>
+<th:block th:fragment="admin-brands">
+    <div class="col-4 pb-5">
+        <h1 class="my-4" th:text="'Brands'"></h1>
+        <ul class="list-group">
+            <th:block th:each="brand : ${allBrands}">
+                <a th:href="@{|/admin/brands/edit/${brand.id}|}"
+                   class="list-group-item list-group-item-action"
+                   th:classappend="${brand.name.equals(currentBrand)}? 'active'">
+
+                    <span class="" th:text="${brand.name}"></span>
+                </a>
+
+            </th:block>
+        </ul>
+    </div>
+    <div class="col-6">
+        <a th:href="@{/admin/brands/add}" class="btn btn-primary mt-4" th:text="'Add Brand'"></a>
+        <th:block th:if="${brandForm}" th:include="includes/forms/brand-form :: brand-form"/>
+    </div>
+</th:block>
+
+</body>
+</html>

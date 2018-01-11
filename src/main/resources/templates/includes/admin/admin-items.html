@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+</head>
+<body>
+
+<th:block th:fragment="admin-items">
+    <div class="col-12 pt-2 mb-4" style="background-color: #fff">
+
+        <th:block th:each="item : ${items}">
+
+            <div class="media">
+                <a class="col-2" th:href="@{|/admin/items/edit/${item.id}|}">
+                    <img class="d-flex align-self-center pt-3 w-100" th:src="@{|/items/${item.id}/image|}"/>
+                </a>
+                <div class="media-body">
+                    <a th:href="@{|/admin/items/edit/${item.id}|}">
+                        <h5 class="mt-0" th:text="${item.name}"></h5>
+                    </a>
+                    <table class="table">
+                        <tr>
+                            <td th:text="Size"></td>
+                            <th:block th:each="availability : ${item.itemAvailabilities}">
+                                <td th:if="${availability.size}" th:text="${availability.size.size}"></td>
+                            </th:block>
+                        </tr>
+                        <tr>
+                            <td th:text="Quantity"></td>
+                            <th:block th:each="availability : ${item.itemAvailabilities}">
+                                <td th:text="${availability.quantity}"></td>
+                            </th:block>
+                        </tr>
+                    </table>
+                    <p class="mb-0" th:text="|$ ${item.price}|"></p>
+                </div>
+            </div>
+            <hr/>
+
+        </th:block>
+    </div>
+</th:block>
+
+
+</body>
+</html>

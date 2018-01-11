@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+>
+<head>
+    <meta charset="UTF-8"/>
+</head>
+<body>
+
+<th:block th:fragment="list-items">
+
+    <th:block th:if="${items.size() == 0}">
+        <div class="offset-3 col-6 mt-5" style="color:red">
+            <h2 th:text="|Sorry, no mutches found|"></h2>
+        </div>
+    </th:block>
+
+    <th:block th:each="item : ${items}">
+        <!--"http://placehold.it/700x400"-->
+        <div class="col-lg-4 col-md-6 mb-4">
+            <div class="card text-center h-100">
+                <a th:href="@{|/items/show/${item.id}|}">
+                    <img class="card-img-top pt-2" style="max-height:145.7px" th:src="@{|/items/${item.id}/image|}"
+                         alt=""/></a>
+                <div class="card-block">
+                    <div style="height: 60px;">
+                        <h4 class="card-title">
+                            <a th:href="@{|/items/show/${item.id}|}" th:text="${item.name}"></a>
+                        </h4>
+                    </div>
+                    <h5 th:text="|$ ${item.price}|"></h5>
+                    <p class="card-text" th:text="${#strings.abbreviate(item.description,30)}"></p>
+
+                    <!--<div class="btn-group" sec:authorize="isAuthenticated()">-->
+                    <!--<button class="btn btn-primary" th:text="'To Cart'"-->
+                    <!--th:onclick="|addToCart(${item.id})|"></button>-->
+                    <!--<button class="btn btn-success" th:text="'Order Now'"></button>-->
+                    <!--</div>-->
+                </div>
+                <div class="card-footer">
+                    <small class="text-muted"
+                           th:text="|&#9733; &#9733; &#9733; &#9733; &#9734; ${item.rating} Stars|"></small>
+                </div>
+
+            </div>
+        </div>
+
+    </th:block>
+
+</th:block>
+
+
+</body>
+</html>

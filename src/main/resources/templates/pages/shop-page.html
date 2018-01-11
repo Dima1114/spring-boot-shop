@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+>
+
+<head>
+
+    <meta name="base-url" id="baseUrl" th:content="@{/}" charset="UTF-8"/>
+    <title>FreeRide - shop</title>
+
+    <!-- Bootstrap core CSS -->
+    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet"/>
+    <link th:href="@{/css/bootstrap-grid.min.css}" rel="stylesheet"/>
+    <link th:href="@{/css/bootstrap-reboot.min.css}" rel="stylesheet"/>
+    <link th:href="@{/css/bootstrap-multiple.css}" rel="stylesheet"/>
+
+    <!-- Custom styles for this template -->
+    <link th:href="@{/css/background.css}" rel="stylesheet"/>
+    <link th:href="@{/css/alert.css}" rel="stylesheet"/>
+    <!--<link th:href="@{/css/custom.css}" rel="stylesheet"/>-->
+    <!--<link th:href="@{/css/item2style.css}" rel="stylesheet"/>-->
+</head>
+
+<body>
+
+<!-- Navigation -->
+<th:block th:include="includes/navigation :: main-nav"/>
+
+<!-- Page Content -->
+<div class="container">
+
+    <div class="row">
+
+        <div class="col-lg-3">
+
+            <!--Categories-->
+            <th:block th:include="includes/categories :: main-categories"/>
+
+            <!--Sorter-->
+            <th:block th:include="includes/forms/sorting-form :: sorting"/>
+        </div>
+        <!-- /.col-lg-3 -->
+
+        <div class="col-lg-9">
+
+            <div class="row" style="padding-top: 30px">
+
+                <!--All products-->
+                <th:block th:include="includes/item :: list-items"/>
+
+            </div>
+            <!-- /.row -->
+
+        </div>
+        <!-- /.col-lg-9 -->
+
+    </div>
+    <!-- /.row -->
+
+    <!--Pagination include-->
+    <th:block th:include="includes/pagination :: main-pagination"/>
+
+</div>
+<!-- /.container -->
+
+<!-- Footer -->
+<th:block th:include="includes/footer :: main-footer"/>
+
+<!-- Bootstrap core JavaScript -->
+<script th:src="@{/js/jquery.js}"></script>
+<script th:src="@{/js/bootstrap.min.js}"></script>
+<script th:src="@{/js/bootstrap.bundle.js}"></script>
+<script th:src="@{/js/bootstrap-multiple.js}"></script>
+
+<!--Adding item to cart AJAX-->
+<script th:src="@{/js/cart.js}"></script>
+<script th:src="@{/js/category-size.js}"></script>
+<script th:src="@{/js/dropdown-fix.js}"></script>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#selectBrand').multiselect();
+    });
+</script>
+
+</body>
+
+</html>

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+>
+
+<head>
+
+    <meta name="base-url" id="baseUrl" th:content="@{/}" charset="UTF-8"/>
+    <title>FreeRide</title>
+
+    <!-- Bootstrap core CSS -->
+    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet"/>
+    <link th:href="@{/css/bootstrap-grid.min.css}" rel="stylesheet"/>
+    <link th:href="@{/css/bootstrap-reboot.min.css}" rel="stylesheet"/>
+
+    <!-- Custom styles for this template -->
+    <link th:href="@{/css/background.css}" rel="stylesheet"/>
+    <link th:href="@{/css/mainCarouselOverride.css}" rel="stylesheet"/>
+    <!--<link th:href="@{/css/custom.css}" rel="stylesheet"/>-->
+
+</head>
+
+<body>
+
+<!-- Navigation -->
+<th:block th:include="includes/navigation :: main-nav"/>
+
+<!-- Page Content -->
+<div class="container">
+
+    <div class="row">
+
+        <div class="col-lg-3">
+
+            <!--Categories-->
+            <th:block th:include="includes/categories :: main-categories"/>
+
+        </div>
+        <!-- /.col-lg-3 -->
+
+        <div class="col-lg-9">
+
+            <!--Main Slider-->
+            <th:block th:include="includes/slider :: main-slider"/>
+
+
+            <h2 th:text="'Most raited products'" class="text-center"></h2>
+            <div class="row">
+                <span id="itemsInRow" style="display: none" th:text="3"></span>
+                <!--All products-->
+
+                <th:block th:include="includes/main-items-carousel :: main-items-carousel"/>
+            </div>
+            <!-- /.row -->
+
+        </div>
+        <!-- /.col-lg-9 -->
+
+    </div>
+    <!-- /.row -->
+
+</div>
+<!-- /.container -->
+
+<!-- Footer -->
+<th:block th:include="includes/footer :: main-footer"/>
+
+
+<!-- Bootstrap core JavaScript -->
+<script th:src="@{/js/jquery.js}"></script>
+<script th:src="@{/js/bootstrap.min.js}"></script>
+<script th:src="@{/js/bootstrap.bundle.js}"></script>
+
+<script th:src="@{/js/profile-carousel.js}"></script>
+<script th:src="@{/js/dropdown-fix.js}"></script>
+
+<!--Adding item to cart AJAX-->
+<script th:src="@{/js/cart.js}"></script>
+
+</body>
+
+</html>

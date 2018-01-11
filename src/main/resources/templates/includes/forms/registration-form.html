@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+</head>
+<body>
+
+<th:block th:fragment="registration-form">
+
+    <div class="col-5 offset-3 mt-4 mb-5 rounded" style="background-color: #fff">
+        <h1 class="text-center" th:text="'Registration'"></h1>
+        <form method="post" th:action="@{/registration}" th:object="${registrationForm}">
+            <div class="form-group col-md-12" th:classappend="${#fields.hasErrors('login')}?'has-danger'">
+                <label class="sr-only" for="login">Username</label>
+                <div class="input-group mb-2 mb-sm-0">
+                    <div class="input-group-addon w-25"><i class="icon-user icon-2x"></i></div>
+                    <input type="text" class="form-control" id="login" placeholder="Username"
+                           th:field="*{login}"
+                           th:classappend="${#fields.hasErrors('login')}?'form-control-danger'"/>
+                </div>
+                <label class="form-control-feedback" for="password" th:if="${#fields.hasErrors('login')}"
+                       th:errors="*{login}"></label>
+            </div>
+            <div class="form-group col-md-12"
+                 th:classappend="${#fields.hasErrors('password')}?'has-danger'">
+                <label class="sr-only" for="password">Password</label>
+                <div class="input-group mb-2 mb-sm-0">
+                    <div class="input-group-addon w-25"><i class="icon-unlock-alt icon-2x"></i></div>
+                    <input type="password" class="form-control" id="password" placeholder="Password"
+                           th:field="*{password}"
+                           th:classappend="${#fields.hasErrors('password')}?'form-control-danger'"/>
+                </div>
+                <label class="form-control-feedback" for="password" th:if="${#fields.hasErrors('password')}"
+                       th:errors="*{password}"></label>
+            </div>
+            <div class="form-group col-md-12" th:classappend="${#fields.hasErrors('email')}?'has-danger'">
+                <label class="sr-only" for="email">Password</label>
+                <div class="input-group mb-2 mb-sm-0">
+                    <div class="input-group-addon w-25"><i class="icon-envelope icon-2x"></i></div>
+                    <input type="email" class="form-control" id="email" placeholder="Email"
+                           th:field="*{email}"
+                           th:classappend="${#fields.hasErrors('email')}?'form-control-danger'"/>
+                </div>
+                <label class="form-control-feedback" for="email" th:if="${#fields.hasErrors('email')}"
+                       th:errors="*{email}"></label>
+            </div>
+
+            <div class="form-group col-md-12">
+                <div class="col-sm-12">
+                    <button type="submit" class="btn btn-primary btn-lg" th:text="'Register'"></button>
+                </div>
+            </div>
+        </form>
+
+    </div>
+
+</th:block>
+
+</body>
+</html>

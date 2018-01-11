@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+>
+<head>
+    <meta charset="UTF-8"/>
+</head>
+<body>
+
+<th:block th:fragment="sorting">
+
+    <div class="col-md-12 mt-5 rounded" style="background-color: #fff">
+        <h3 th:text="'Product filter'" class="text-center pt-3"></h3>
+        <form method="post" th:action="@{/items/all/search}" th:object="${sortForm}">
+
+            <div class="form-group col-md-12">
+                <label class="mr-sm-2" for="sortBy" th:text="'Sort By'"></label>
+                <select class="custom-select mb-2 mr-sm-2 mb-sm-0 col-10" id="sortBy" th:field="*{sortBy}">
+                    <option value="name" th:text="name"></option>
+                    <option value="price" th:text="price"></option>
+                    <option value="rating" th:text="rating"></option>
+                </select>
+            </div>
+            <div class="col-md-12">
+                <label class="mr-sm-2" th:text="'Sort Order'"></label>
+                <div class="btn-group w-100" id="sortOrder" data-toggle="buttons">
+                    <label class="btn btn-secondary active w-50">
+                        <input type="radio" id="sortAsc" name="sortOrder" th:value="true"
+                               th:text="ASC" th:field="*{ascending}"/>
+                    </label>
+                    <label class="btn btn-secondary w-50">
+                        <input type="radio" id="sortDesc" name="sortOrder" th:value="false"
+                               th:text="DESC" th:field="*{ascending}"/>
+                    </label>
+                </div>
+            </div>
+
+            <div class="form-group col-md-12">
+                <label for="nameSearch" th:text="'Product name'"></label>
+                <input type="text" class="form-control" id="nameSearch" placeholder="Product name" th:field="*{name}"/>
+            </div>
+
+            <div class="form-group  col-md-12">
+                <label for="priceMin" th:text="'Min price'"></label>
+                <input type="number" class="form-control" name="price-min" id="priceMin"
+                       min="0" max="1000" th:field="*{minPrice}"/>
+            </div>
+            <div class="form-group  col-md-12">
+                <label for="priceMax" th:text="'Max price'"></label>
+                <input type="number" class="form-control" name="price-max" id="priceMax"
+                       min="0" max="1000" th:field="*{maxPrice}"/>
+            </div>
+
+            <div class="form-group col-md-12">
+                <label class="mr-sm-2" for="selectCategory" th:text="Category"></label>
+                <select class="custom-select mb-2 mr-sm-2 mb-sm-0 col-10" id="selectCategory" th:field="*{category}">
+                    <option value="" th:text="'All caregories'"></option>
+                    <th:block th:each="category : ${categories}">
+                        <option th:class="${category.sizeType}"
+                                th:value="${category.name}" th:text="${category.name}"></option>
+                    </th:block>
+
+                </select>
+            </div>
+
+            <div class="form-group col-md-12">
+                <label class="mr-sm-2 mb-0" for="selectSize" th:text="Size"></label>
+                <p class="p-0 m-0">
+                    <small th:text="'Choose category at first'"></small>
+                </p>
+                <select class="custom-select mb-2 mr-sm-2 mb-sm-0 col-10" id="selectSize" th:field="*{size}">
+                    <option value="" th:text="'All sizes'"></option>
+                    <th:block th:each="size : ${sizes}">
+                        <option th:class="|${size.type} sizeOption|" th:value="${size.size}"
+                                th:text="${size.size}" style="display: none"></option>
+                    </th:block>
+
+                </select>
+            </div>
+
+            <div class="form-group col-md-12">
+                <div>
+                    <label class="mr-sm-2" for="selectBrand" th:text="Brands"></label>
+                </div>
+                <select multiple="multiple" class="custom-select mb-2 mr-sm-2 mb-sm-0 col-12" id="selectBrand"
+                        th:field="*{brandsDto}">
+                    <!--<option value="" th:text="'brandsDtoands'"></option>-->
+                    <th:block th:each="brand,itr : ${brands}">
+                        <option th:value="${brand.name}" th:text="${brand.name}"
+                                th:field="*{brandsDto}"></option>
+                    </th:block>
+
+                </select>
+            </div>
+
+            <div class="form-group col-md-12 pb-4">
+                <div class="col-sm-12">
+                    <button type="submit" class="btn btn-primary" th:text="Submit"></button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+</th:block>
+
+</body>
+</html>

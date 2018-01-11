@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+</head>
+<body>
+<th:block th:fragment="admin-comments">
+    <div class="col-12 rounded py-3 mb-4" style="background-color: #fff">
+        <h3 th:text="${itemsOnSite} ? 'Recently added comments' : 'Comments'"></h3>
+        <th:block th:each="comment : ${comments}">
+            <div class="media">
+                <a class="col-2" th:href="@{|/items/show/${comment.item.id}|}">
+                    <img class="d-flex align-self-center pt-3 w-100" th:src="@{|/items/${comment.item.id}/image|}"/>
+                </a>
+                <div class="media-body">
+                    <h5 class="mt-0" th:text="${comment.item.name}"></h5>
+                    <p th:text="${comment.text}"></p>
+                </div>
+            </div>
+            <hr/>
+        </th:block>
+    </div>
+</th:block>
+
+</body>
+</html>

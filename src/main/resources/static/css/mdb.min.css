@@ -1,0 +1,8 @@
+.hm-zoom img,.hm-zoom video,.overlay img,.overlay video{
+    -webkit-transition:all .2s linear;transition:all .2s linear}
+.hm-zoom:hover .mask,.overlay:hover .mask{opacity:1}
+.hm-zoom:hover img{
+    -webkit-transform:scale(1.03);-ms-transform:scale(1.03);transform:scale(1.03)}
+.overlay .mask{
+    opacity:0;-webkit-transition:all .4s ease-in-out;transition:all .4s ease-in-out}
+

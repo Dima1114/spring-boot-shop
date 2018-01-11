@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <meta name="base-url" id="baseUrl" th:content="@{/}" charset="UTF-8"/>
+    <title>FreeRide - admin</title>
+
+    <!-- Bootstrap core CSS -->
+    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet"/>
+    <link th:href="@{/css/bootstrap-grid.min.css}" rel="stylesheet"/>
+    <link th:href="@{/css/bootstrap-reboot.min.css}" rel="stylesheet"/>
+    <link th:href="@{/css/bootstrap-multiple.css}" rel="stylesheet"/><!-- multi-select -->
+
+    <!-- Custom styles for this template -->
+    <link th:href="@{/css/background.css}" rel="stylesheet"/>
+    <link th:href="@{/css/mdb.min.css}" rel="stylesheet"/><!-- file upload css -->
+    <link th:href="@{/css/login.css}" rel="stylesheet"/><!-- footer stick to the bottom -->
+    <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet"/>
+
+    <style>
+        .admin .dropdown-item {
+            color: white;
+        }
+
+        .admin .dropdown-item:hover {
+            color: black;
+        }
+    </style>
+
+</head>
+
+<body>
+<div class="wrapper">
+    <div class="content">
+        <!-- Navigation -->
+        <th:block th:include="includes/navigation :: main-nav"/>
+
+        <!-- Page Content -->
+        <div class="container">
+
+            <div class="row">
+
+                <div class="col-lg-3">
+
+                    <!--Admin panel-->
+                    <th:block th:include="includes/admin/admin-panel :: admin-nav"/>
+
+                </div>
+                <!-- /.col-lg-3 -->
+
+                <div class="col-lg-9">
+
+                    <div class="row" style="padding-top: 30px">
+
+                        <th:block th:if="${itemsOnSite}"
+                                  th:include="includes/admin/admin-statistics :: admin-stat"/>
+
+                        <th:block th:if="${items}" th:include="includes/admin/admin-items :: admin-items "/>
+                        <th:block th:if="${itemForm}" th:include="includes/forms/item-form :: item-form"/>
+
+                        <th:block th:if="${allCategories}"
+                                  th:include="includes/admin/admin-categories :: admin-categories "/>
+                        <th:block th:unless="${allCategories}">
+                            <th:block th:if="${categoryForm}"
+                                      th:include="includes/forms/category-form :: category-form"/>
+                        </th:block>
+
+                        <th:block th:if="${allBrands}"
+                                  th:include="includes/admin/admin-brands :: admin-brands "/>
+
+                        <th:block th:if="${users}"
+                                  th:include="includes/admin/admin-users :: admin-users "/>
+                        <th:block th:if="${registrationForm}"
+                                  th:include="includes/forms/registration-form :: registration-form"/>
+
+                        <th:block th:if="${allComments}"
+                                  th:include="includes/admin/admin-comments :: admin-comments"/>
+
+                    </div>
+                    <!-- /.row -->
+
+                </div>
+                <!-- /.col-lg-9 -->
+
+            </div>
+            <!-- /.row -->
+
+            <!--Pagination include-->
+            <th:block th:if="${items} OR ${allComments}" th:include="includes/pagination :: main-pagination"/>
+
+        </div>
+        <!-- /.container -->
+    </div>
+
+    <div class="footer">
+        <!-- Footer -->
+        <th:block th:include="includes/footer :: main-footer"/>
+    </div>
+</div>
+
+
+<!-- Bootstrap core JavaScript -->
+<script th:src="@{/js/jquery.js}"></script>
+<script th:src="@{/js/bootstrap.min.js}"></script>
+<!--<script th:src="@{/js/bootstrap.bundle.js}"></script>-->
+<script th:src="@{/js/bootstrap-multiple.js}"></script>
+
+<script th:src="@{/js/image-preview.js}"></script>
+<script th:src="@{/js/bootstrap-fileselect.js}"></script>
+<script>
+    $('#fileupload').fileselect();
+</script>
+
+<!--Adding item to cart AJAX-->
+<script th:src="@{/js/cart.js}"></script>
+<script th:src="@{/js/category-size.js}"></script>
+<script th:src="@{/js/dropdown-fix.js}"></script>
+<script th:src="@{/js/item-form.js}"></script>
+
+</body>
+
+</html>

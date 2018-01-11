@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+>
+<head>
+    <meta charset="UTF-8"/>
+</head>
+<body>
+<th:block th:fragment="main-categories">
+
+    <h1 class="my-4" th:text="'Categories'"></h1>
+    <ul class="list-group">
+        <th:block th:each="category : ${categories}">
+            <a th:href="@{|/items/${category.name}|}" class="list-group-item list-group-item-action"
+               th:classappend="${category.name.equals(currentCategory)}? 'active'">
+
+                <span class="" th:text="${category.name}"></span>
+                <span class="badge badge-primary" style="position: absolute; right:10%"
+                      th:text="${category.itemsCount}"></span>
+
+            </a>
+
+        </th:block>
+    </ul>
+
+</th:block>
+
+</body>
+</html>

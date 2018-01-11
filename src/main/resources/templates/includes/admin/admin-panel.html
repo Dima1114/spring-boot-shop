@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+>
+<head>
+    <meta charset="UTF-8"/>
+</head>
+<body>
+
+<th:block th:fragment="admin-nav">
+
+
+    <h1 class="my-4" th:text="'Admin Panel'"></h1>
+    <div class="btn-group-vertical w-100 admin">
+
+        <div class="btn-group" role="group">
+            <button id="btnGroupDrop1" type="button" class="btn btn-primary bg-inverse dropdown-toggle"
+                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" th:text="Products">
+            </button>
+            <div class="dropdown-menu dropdown-menu-right bg-inverse" style="top:-50%;left:100%"
+                 aria-labelledby="btnGroupDrop1">
+                <a class="dropdown-item" th:href="@{/admin/items}" th:text="'All Products'"></a>
+                <a class="dropdown-item" th:href="@{/admin/comments}" th:text="'All Comments'"></a>
+                <a class="dropdown-item" th:href="@{/admin/items/add}" th:text="'New Product'"></a>
+            </div>
+        </div>
+
+        <div class="btn-group" role="group">
+            <button id="btnGroupDrop2" type="button" class="btn btn-primary bg-inverse dropdown-toggle"
+                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" th:text="Categories">
+            </button>
+            <div class="dropdown-menu dropdown-menu-right bg-inverse" style="top:-50%;left:100%"
+                 aria-labelledby="btnGroupDrop1">
+                <a class="dropdown-item" th:href="@{/admin/categories}" th:text="'All Categories'"></a>
+                <a class="dropdown-item" th:href="@{/admin/categories/add}" th:text="'New Category'"></a>
+            </div>
+        </div>
+
+        <div class="btn-group" role="group">
+            <button id="btnGroupDrop3" type="button" class="btn btn-primary bg-inverse dropdown-toggle"
+                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" th:text="Brands">
+            </button>
+            <div class="dropdown-menu dropdown-menu-right bg-inverse" style="top:-50%;left:100%"
+                 aria-labelledby="btnGroupDrop1">
+                <a class="dropdown-item" th:href="@{/admin/brands}" th:text="'All Brands'"></a>
+            </div>
+        </div>
+
+        <div class="btn-group" role="group">
+            <button id="btnGroupDrop4" type="button" class="btn btn-primary bg-inverse dropdown-toggle"
+                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" th:text="Users">
+            </button>
+            <div class="dropdown-menu dropdown-menu-right bg-inverse" style="top:-50%;left:100%"
+                 aria-labelledby="btnGroupDrop1">
+                <a class="dropdown-item" th:href="@{/admin/users}" th:text="'All Users'"></a>
+                <a class="dropdown-item" th:href="@{/admin/users/add}" th:text="'New User'"></a>
+            </div>
+        </div>
+
+
+    </div>
+
+
+</th:block>
+
+</body>
+</html>

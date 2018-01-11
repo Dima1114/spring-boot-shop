@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+</head>
+<body>
+
+<th:block th:fragment="category-form">
+
+    <div class="col-12 mt-5 rounded mb-5" style="background-color: #fff">
+        <h3 th:text="'Category form'" class="text-center pt-3"></h3>
+        <form method="post" th:action="@{/admin/categories/add}" th:object="${categoryForm}">
+
+            <div class="form-group col-12" style="display: none">
+                <input type="text" class="form-control" id="id"  th:field="*{id}"/>
+            </div>
+
+            <div class="form-group col-12" th:classappend="${#fields.hasErrors('name')}?'has-danger'">
+                <label for="name" th:text="'Category name'"></label>
+                <input type="text" class="form-control" id="name" placeholder="Category name" th:field="*{name}"
+                       th:classappend="${#fields.hasErrors('name')}?'form-control-danger'"/>
+                <label class="form-control-feedback" for="name" th:if="${#fields.hasErrors('name')}"
+                       th:errors="*{name}"></label>
+            </div>
+
+            <div class="form-group col-12" th:classappend="${#fields.hasErrors('description')}?'has-danger'">
+                <label for="description" th:text="'Category description'"></label>
+                <textarea class="form-control" rows="5" id="description" placeholder="Category description"
+                          th:field="*{description}" th:classappend="${#fields.hasErrors('description')}?'form-control-danger'"></textarea>
+                <label class="form-control-feedback" for="description" th:if="${#fields.hasErrors('description')}"
+                       th:errors="*{description}"></label>
+            </div>
+
+            <div class="form-group col-12" th:classappend="${#fields.hasErrors('sizeType')}?'has-danger'">
+                <label class="mr-sm-2 col-4" for="selectSizeCategory" th:text="'Size Type'"></label>
+                <select class="custom-select mb-2 mr-sm-2 mb-sm-0 col-8" id="selectSizeCategory" th:field="*{sizeType}"
+                        th:classappend="${#fields.hasErrors('sizeType')}?'form-control-danger'">
+                    <option value="" th:text="'Choose size Category'"></option>
+                    <th:block th:each="sizeType : ${sizeTypes}">
+                        <option th:value="${sizeType}" th:text="${sizeType}"></option>
+                    </th:block>
+                </select>
+                <br/>
+                <label class="form-control-feedback" for="selectSizeCategory" th:if="${#fields.hasErrors('sizeType')}"
+                       th:errors="*{sizeType}"></label>
+            </div>
+
+            <div class="form-group col-12 pb-4">
+                <div class="col-12">
+                    <button th:if="*{id}!=null" type="submit" class="btn btn-primary" th:text="'Update Category'"></button>
+                    <button th:if="*{id}!=null" type="button" class="btn btn-danger" data-toggle="modal"
+                            data-target="#myModal" th:text="'Delete Category'"></button>
+                    <button th:unless="*{id}!=null" type="submit" class="btn btn-primary" th:text="'Add Category'"></button>
+                </div>
+            </div>
+
+            <!-- Modal -->
+            <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="myModalLabel">Modal title</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <p th:text="'Delete this category?'"></p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal" th:text="Close"></button>
+                            <a class="btn btn-primary"
+                               th:text="Delete" th:href="|@{/admin/categories/delete/}*{id}|"></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+
+</th:block>
+
+</body>
+</html>

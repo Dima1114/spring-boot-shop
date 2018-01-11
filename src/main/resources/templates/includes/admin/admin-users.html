@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+</head>
+<body>
+
+<th:block th:fragment="admin-users">
+    <div class="col-12 pt-2 mb-4" style="background-color: #fff">
+
+        <th:block th:each="user : ${users}">
+
+            <div class="media">
+                <a class="col-2" th:href="@{|/admin/users/edit/${user.id}|}">
+                    <img class="d-flex align-self-center pt-3 w-100" th:src="@{|/admin/users/image/${user.id}|}"/>
+                </a>
+                <div class="media-body">
+                    <div class="row">
+                        <h5 class="mt-0 col-3" th:text="${user.username}"></h5>
+                        <p class="pr-2" th:text="'Roles: '"></p>
+                        <span class="mt-0 pr-1" th:each="role : ${user.roles}" th:text="|${role.name}|"></span>
+                    </div>
+                    <table class="table table-sm">
+                        <tr>
+                            <td th:text="'First Name'"></td>
+                            <td th:text="${user.firstName}"></td>
+                        </tr>
+                        <tr>
+                            <td th:text="'Last Name'"></td>
+                            <td th:text="${user.lastName}"></td>
+                        </tr>
+                        <tr>
+                            <td th:text="'Email'"></td>
+                            <td th:text="${user.email}"></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <hr/>
+
+        </th:block>
+    </div>
+</th:block>
+
+
+</body>
+</html>

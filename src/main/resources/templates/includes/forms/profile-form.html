@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8"/>
+</head>
+<body>
+
+<th:block th:fragment="profile-form">
+
+    <div class="col-12 py-3 mt-3 rounded" style="background-color: #fff">
+        <h3 th:text="'Profile form'" class="text-center pt-3"></h3>
+
+        <form th:object="${userForm}" th:action="@{|/profile/update/*{id}|}" enctype="multipart/form-data" method="post"
+              class="col-12">
+
+            <div style="display: none"><input type="text" th:field="*{id}"/></div>
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="overlay hm-zoom" id="dvPreview">
+                        <img class="img-fluid w-100 rounded mb-3" th:src="@{|/profile/image/*{id}|}"/>
+                    </div>
+                    <input id="fileupload" type="file" th:field="*{image}"/>
+
+                </div>
+
+                <div class="col-md-7">
+                    <div class="row">
+                        <div class="form-group col-md-6"
+                             th:classappend="${#fields.hasErrors('firstName')}?'has-danger'">
+                            <label for="firstName" th:text="'First Name'"></label>
+                            <input type="text" class="form-control" th:field="*{firstName}"
+                                   th:classappend="${#fields.hasErrors('firstName')}?'form-control-danger'"/>
+                            <label class="form-control-feedback" for="firstName"
+                                   th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}"></label>
+                        </div>
+                        <div class="form-group col-md-6" th:classappend="${#fields.hasErrors('lastName')}?'has-danger'">
+                            <label for="lastName" th:text="'Last Name'"></label>
+                            <input type="text" class="form-control" th:field="*{lastName}"
+                                   th:classappend="${#fields.hasErrors('lastName')}?'form-control-danger'"/>
+                            <label class="form-control-feedback" for="lastName"
+                                   th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"></label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-md-6" th:classappend="${#fields.hasErrors('password')}?'has-danger'">
+                            <label for="password" th:text="'Old Password'"></label>
+                            <input type="password" class="form-control" th:field="*{password}"
+                                   th:classappend="${#fields.hasErrors('password')}?'form-control-danger'"/>
+                            <label class="form-control-feedback" for="password"
+                                   th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></label>
+                        </div>
+                        <div class="form-group col-md-6"
+                             th:classappend="${#fields.hasErrors('newPassword')}?'has-danger'">
+                            <label for="newPassword" th:text="'New Password'"></label>
+                            <input type="password" class="form-control" th:field="*{newPassword}"
+                                   th:classappend="${#fields.hasErrors('newPassword')}?'form-control-danger'"/>
+                            <label class="form-control-feedback" for="newPassword"
+                                   th:if="${#fields.hasErrors('newPassword')}" th:errors="*{newPassword}"></label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-md-6" th:classappend="${#fields.hasErrors('email')}?'has-danger'">
+                            <label for="email" th:text="'Email'"></label>
+                            <input type="email" class="form-control" th:field="*{email}" id="email"
+                                   th:classappend="${#fields.hasErrors('email')}?'form-control-danger'"/>
+                            <label class="form-control-feedback" for="email"
+                                   th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-md-6" th:classappend="${#fields.hasErrors('address')}?'has-danger'">
+                            <label for="address" th:text="'Address'"></label>
+                            <input type="text" class="form-control" th:field="*{address}"
+                                   th:classappend="${#fields.hasErrors('address')}?'form-control-danger'"/>
+                            <label class="form-control-feedback" for="address"
+                                   th:if="${#fields.hasErrors('address')}" th:errors="*{address}"></label>
+                        </div>
+                    </div>
+
+                    <div class="form-group" sec:authorize="hasAuthority('admin')">
+                        <label th:text="'Roles'"></label>
+                        <div class="form-check">
+                            <th:block th:each="role : ${allRoles}">
+                                <label class="custom-control custom-checkbox">
+                                    <input class="custom-control-input" type="checkbox" th:value="${role.name}"
+                                           th:field="*{roles}"/>
+                                    <span class="custom-control-indicator"></span>
+                                    <span class="custom-control-description" th:text="${role.name}"></span>
+                                </label>
+                            </th:block>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary" th:text="'Update profile'"></button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+</th:block>
+
+</body>
+</html>
