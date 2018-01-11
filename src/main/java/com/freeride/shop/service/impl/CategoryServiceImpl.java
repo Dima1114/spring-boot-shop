@@ -19,11 +19,9 @@ import java.util.List;
 public class CategoryServiceImpl implements CategoryService {
 
     private CategoryRepository categoryRepository;
-    private CacheManager cacheManager;
 
-    public CategoryServiceImpl(CategoryRepository categoryRepository, CacheManager cacheManager) {
+    public CategoryServiceImpl(CategoryRepository categoryRepository) {
         this.categoryRepository = categoryRepository;
-        this.cacheManager = cacheManager;
     }
 
     @Override
