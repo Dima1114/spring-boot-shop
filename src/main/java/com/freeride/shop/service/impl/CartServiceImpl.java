@@ -24,14 +24,12 @@ public class CartServiceImpl implements CartService {
     private CartRepository cartRepository;
     private SecurityService securityService;
 
-
     public CartServiceImpl(ItemAvailabilityRepository itemAvailabilityRepository,
                            CartRepository cartRepository, SecurityService securityService) {
         this.itemAvailabilityRepository = itemAvailabilityRepository;
         this.cartRepository = cartRepository;
         this.securityService = securityService;
     }
-
 
     @Override
     public void addItem(CartDto cartDto) {
@@ -67,19 +65,6 @@ public class CartServiceImpl implements CartService {
                 .map(Cart::getItemAvailability)
                 .collect(Collectors.toList());
     }
-
-//    @Override
-//    public List<Item> listCartItems() {
-//        return listCartItems(securityService.getCurrentUser());
-//    }
-//
-//    @Override
-//    public List<Item> listCartItems(User user) {
-//        return cartRepository.findAllByUser(user).stream()
-//                .map(Cart::getItemAvailability)
-//                .map(ItemAvailability::getItem)
-//                .collect(Collectors.toList());
-//    }
 
     @Override
     public BigDecimal getCartTotal() {

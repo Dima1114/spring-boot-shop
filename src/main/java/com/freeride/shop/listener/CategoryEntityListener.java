@@ -13,6 +13,7 @@ import java.util.List;
 
 public class CategoryEntityListener {
 
+    //use autowire because class is not a spring component(bean)
     @Autowired
     private ItemService itemService;
 

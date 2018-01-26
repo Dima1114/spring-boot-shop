@@ -116,7 +116,6 @@ public class UserServiceImpl implements UserService {
             return Files.readAllBytes(Paths.get(imagePath, DEFAULT_IMAGE + ".jpg"));
         } catch (IOException e) {
             return new byte[0];
-
         }
     }
 

@@ -28,7 +28,7 @@ public class SliderServiceImpl implements SliderService {
             if (Files.exists(path)) {
                 img = Files.readAllBytes(path);
             } else {
-                img = Files.readAllBytes(Paths.get(imagePath, "slide" + 0 + ".jpg"));
+                img = Files.readAllBytes(Paths.get(imagePath, "slide" + DEFAULT_SLIDE + ".jpg"));
             }
         } catch (IOException e) {
             e.printStackTrace();

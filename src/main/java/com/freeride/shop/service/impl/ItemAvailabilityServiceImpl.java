@@ -31,19 +31,11 @@ public class ItemAvailabilityServiceImpl implements ItemAvailabilityService {
         return itemAvailabilityRepository.findAllByItemOrderBySize(item);
     }
 
-
     public List<Item> getItemsBySize(Size size) {
         return itemAvailabilityRepository.findAllBySize(size).stream()
                 .map(ItemAvailability::getItem)
                 .collect(Collectors.toList());
     }
-
-    //    @Override
-//    public List<Size> getItemSizes(Item item) {
-//        return itemAvailabilityRepository.findAllByItemOrderBySize(item).stream()
-//                .map(ItemAvailability::getSize)
-//                .collect(Collectors.toList());
-//    }
 
     @Override
     public List<Size> getItemSizesWithPositiveQuantity(Item item) {
@@ -54,22 +46,15 @@ public class ItemAvailabilityServiceImpl implements ItemAvailabilityService {
 
     @Override
     public boolean saveAvailability(ItemAvailability itemAvailability) {
-//        Size size = itemAvailability.getSize();
-//        Item item = itemAvailability.getItem();
         //TODO fetch Categories List by EntityGraph
-//        boolean isSizeAvailable = size.getAvailableInCategory().stream()
-//                .anyMatch(category -> category.equals(item.getCategory()));
-//        if (isSizeAvailable) {
         itemAvailabilityRepository.save(itemAvailability);
         return true;
-//        }
-//        return false;
     }
 
     @Override
     public void saveAvailabilities(Item item, Map<String, Integer> availabilities) {
 
-        //TODO clean up
+        //TODO clean up this mess
         Map<String, Integer> itemAvailabilities = availabilities.entrySet().stream()
                 .filter(entry -> !Objects.isNull(entry.getValue()))
                 .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));

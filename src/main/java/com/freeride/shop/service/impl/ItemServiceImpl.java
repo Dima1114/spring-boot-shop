@@ -33,12 +33,10 @@ public class ItemServiceImpl implements ItemService {
 
     private ItemRepository itemRepository;
     private String imagePath;
-
     private CategoryService categoryService;
     private BrandService brandService;
     private SizeService sizeService;
     private ItemAvailabilityService itemAvailabilityService;
-
 
     public ItemServiceImpl(ItemRepository itemRepository, @Value("${images.item.path}") String imagePath, CategoryService categoryService, BrandService brandService, SizeService sizeService, ItemAvailabilityService itemAvailabilityService) {
         this.itemRepository = itemRepository;
@@ -112,8 +110,6 @@ public class ItemServiceImpl implements ItemService {
     public List<Item> listMostRated() {
         return itemRepository.findTop6ByOrderByRatingDesc();
     }
-
-
 
     @Override
     public void saveItem(ItemDto itemDto) {
