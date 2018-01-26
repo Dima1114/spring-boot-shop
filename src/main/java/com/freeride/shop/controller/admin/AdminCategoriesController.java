@@ -50,7 +50,7 @@ public class AdminCategoriesController {
         return "pages/admin-page";
     }
 
-    @PostMapping("/add")
+    @PostMapping("/add-update")
     public String addOrUpdateCategory(@ModelAttribute("categoryForm") @Valid CategoryDto categoryDto,
                                       BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {

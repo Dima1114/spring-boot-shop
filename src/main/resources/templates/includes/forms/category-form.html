@@ -10,7 +10,7 @@
 
     <div class="col-12 mt-5 rounded mb-5" style="background-color: #fff">
         <h3 th:text="'Category form'" class="text-center pt-3"></h3>
-        <form method="post" th:action="@{/admin/categories/add}" th:object="${categoryForm}">
+        <form method="post" th:action="@{/admin/categories/add-update}" th:object="${categoryForm}">
 
             <div class="form-group col-12" style="display: none">
                 <input type="text" class="form-control" id="id"  th:field="*{id}"/>
