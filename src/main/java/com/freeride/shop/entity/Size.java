@@ -6,17 +6,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-public class Size {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+public class Size extends BaseEntity {
 
     private String size;
     private String type;
-
-//    @ManyToMany(mappedBy = "availableSizes", fetch = FetchType.EAGER)
-//    private List<Category> availableInCategory;
 
     public String getSize() {
         return size;
@@ -25,30 +18,6 @@ public class Size {
     public void setSize(String size) {
         this.size = size;
     }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-//    public List<Category> getAvailableInCategory() {
-//        return availableInCategory;
-//    }
-//
-//    public void setAvailableInCategory(List<Category> availableInCategory) {
-//        this.availableInCategory = availableInCategory;
-//    }
-
-//    public String caregoriesToString() {
-//        StringBuilder sb = new StringBuilder();
-//        for (Category category : availableInCategory) {
-//            sb.append(category.getName().toLowerCase()).append(" ");
-//        }
-//        return sb.toString().trim();
-//    }
 
     public String getType() {
         return type;

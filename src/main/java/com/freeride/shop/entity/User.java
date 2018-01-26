@@ -5,15 +5,10 @@ import java.util.List;
 
 @Entity
 @Table(name="users")
-public class User {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+public class User extends BaseEntity {
 
     @Column(unique = true)
     private String username;
-
     private String password;
 
     @ManyToMany(fetch = FetchType.EAGER)
@@ -26,17 +21,6 @@ public class User {
 
     @OneToMany(mappedBy = "user")
     private List<Cart> cartItems;
-
-//    @OneToMany(mappedBy = "user")
-//    private List<Comment> comments;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public String getUsername() {
         return username;
@@ -77,14 +61,6 @@ public class User {
     public void setAddress(String address) {
         this.address = address;
     }
-
-//    public List<Comment> getComments() {
-//        return comments;
-//    }
-//
-//    public void setComments(List<Comment> comments) {
-//        this.comments = comments;
-//    }
 
     public List<Cart> getCartItems() {
         return cartItems;

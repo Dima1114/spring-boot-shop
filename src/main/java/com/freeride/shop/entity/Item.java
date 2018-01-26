@@ -7,16 +7,11 @@ import java.util.List;
 
 @Entity
 @Table(name = "items")
-public class Item {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+public class Item extends BaseEntity {
 
     private String name;
     private String description;
     private BigDecimal price;
-
     private Integer rating = 3;
     private Integer reviews = 0;
 
@@ -34,14 +29,6 @@ public class Item {
 
     @Column(name = "date")
     private LocalDateTime arrivalDate = LocalDateTime.now();
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public String getName() {
         return name;
@@ -144,9 +131,4 @@ public class Item {
         result = 31 * result + (category != null ? category.hashCode() : 0);
         return result;
     }
-
-    //    public static void main(String[] args) {
-//        LocalDate ld = LocalDate.parse("2017-11-07");
-//        System.out.println(ld);
-//    }
 }

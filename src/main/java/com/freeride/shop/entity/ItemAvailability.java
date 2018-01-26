@@ -3,11 +3,7 @@ package com.freeride.shop.entity;
 import javax.persistence.*;
 
 @Entity
-public class ItemAvailability {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+public class ItemAvailability extends BaseEntity {
 
     @ManyToOne
     @JoinColumn(name = "item_id")
@@ -17,14 +13,6 @@ public class ItemAvailability {
     private Size size;
 
     private Integer quantity;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public Item getItem() {
         return item;

@@ -1,7 +1,6 @@
 package com.freeride.shop.dto;
 
 import com.freeride.shop.entity.Item;
-import com.freeride.shop.entity.User;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.hibernate.validator.constraints.Range;
 import org.springframework.web.multipart.MultipartFile;
@@ -12,7 +11,6 @@ import java.sql.Timestamp;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Optional;
 
 public class ItemDto {
 
