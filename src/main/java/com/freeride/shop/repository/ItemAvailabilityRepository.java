@@ -11,9 +11,6 @@ public interface ItemAvailabilityRepository extends JpaRepository<ItemAvailabili
 
     List<ItemAvailability> findAllByItemOrderBySize(Item item);
     List<ItemAvailability> findAllByItemAndQuantityGreaterThanOrderBySize(Item item, int quantity);
-
     List<ItemAvailability> findAllBySize(Size size);
-
     ItemAvailability findByItem_IdAndSize_Id(Long itemId, Long sizeId);
-
 }
