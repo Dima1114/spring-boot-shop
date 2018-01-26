@@ -28,7 +28,7 @@ public class WebConfig extends WebMvcConfigurerAdapter {
                 .excludePathPatterns("/admin", "/admin/users/**");
         registry.addInterceptor(applicationContext.getBean(SearchInterceptor.class)).addPathPatterns("/items/all/search");
         registry.addInterceptor(applicationContext.getBean(CategoryInterceptor.class))
-                .addPathPatterns("/admin/categories/**");
+                .addPathPatterns("/admin/categories/edit/**", "/admin/categories/add");
     }
 
     @Bean

@@ -19,9 +19,7 @@ public class CacheConfig {
     @Bean
     public CacheManager cacheManager() {
         SimpleCacheManager manager = new SimpleCacheManager();
-
         List<Cache> cacheList = new ArrayList<>();
-
         Cache brandsCache = new CaffeineCache("brands", Caffeine.newBuilder()
                 .maximumSize(1)
                 .expireAfterWrite(1, TimeUnit.DAYS)

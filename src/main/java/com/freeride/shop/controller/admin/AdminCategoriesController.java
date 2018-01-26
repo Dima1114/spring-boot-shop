@@ -29,13 +29,13 @@ public class AdminCategoriesController {
     }
 
     @GetMapping("/edit/{categoryId}")
-    public String categoryEditForm(@PathVariable Long categoryId, RedirectAttributes redirectAttrs) {
+    public String categoryEditForm(@PathVariable Long categoryId, Model model) {
         Category category = categoryService.getCategory(categoryId);
         CategoryDto categoryDto = new CategoryDto(category);
-        redirectAttrs.addFlashAttribute("categoryForm", categoryDto);
-        redirectAttrs.addFlashAttribute("currentCategory", category.getName());
+        model.addAttribute("categoryForm", categoryDto);
+        model.addAttribute("currentCategory", category.getName());
 
-        return "redirect:/admin/categories";
+        return "pages/admin-page";
     }
 
     @GetMapping("/delete/{categoryId}")
@@ -51,8 +51,8 @@ public class AdminCategoriesController {
     }
 
     @PostMapping("/add")
-    public String addCategory(@ModelAttribute("categoryForm") @Valid CategoryDto categoryDto,
-                              BindingResult bindingResult) {
+    public String addOrUpdateCategory(@ModelAttribute("categoryForm") @Valid CategoryDto categoryDto,
+                                      BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             return "pages/admin-page";
         }

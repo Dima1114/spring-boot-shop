@@ -2,12 +2,12 @@ package com.freeride.shop.service.impl;
 
 import com.freeride.shop.dto.CategoryDto;
 import com.freeride.shop.entity.Category;
-import com.freeride.shop.entity.Item;
 import com.freeride.shop.repository.CategoryRepository;
 import com.freeride.shop.service.CategoryService;
-import com.freeride.shop.service.ItemService;
+import org.springframework.cache.Cache;
 import org.springframework.cache.CacheManager;
 import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -19,9 +19,11 @@ import java.util.List;
 public class CategoryServiceImpl implements CategoryService {
 
     private CategoryRepository categoryRepository;
+    private CacheManager cacheManager;
 
-    public CategoryServiceImpl(CategoryRepository categoryRepository) {
+    public CategoryServiceImpl(CategoryRepository categoryRepository, CacheManager cacheManager) {
         this.categoryRepository = categoryRepository;
+        this.cacheManager = cacheManager;
     }
 
     @Override
@@ -30,7 +32,7 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-//    @Cacheable("categories")
+    @Cacheable("categories")
     public List<Category> list() {
         return categoryRepository.findAll();
     }
@@ -46,10 +48,9 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-//    @CacheEvict("categories")
+    @CachePut(value = "categories")
     public void saveCategory(CategoryDto categoryDto) {
         Category category = new Category();
-
         category.setId(categoryDto.getId());
         category.setName(categoryDto.getName());
         category.setDescription(categoryDto.getDescription());
@@ -58,7 +59,7 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-//    @CacheEvict("categories")
+    @CacheEvict(value = "categories", allEntries = true)
     public void deleteCategory(Long categoryId) {
         categoryRepository.delete(categoryId);
     }

@@ -60,9 +60,9 @@
                         <th:block th:if="${items}" th:include="includes/admin/admin-items :: admin-items "/>
                         <th:block th:if="${itemForm}" th:include="includes/forms/item-form :: item-form"/>
 
-                        <th:block th:if="${allCategories}"
+                        <th:block th:if="${allCategories} OR ${currentCategory}"
                                   th:include="includes/admin/admin-categories :: admin-categories "/>
-                        <th:block th:unless="${allCategories}">
+                        <th:block th:unless="${allCategories} OR ${currentCategory}">
                             <th:block th:if="${categoryForm}"
                                       th:include="includes/forms/category-form :: category-form"/>
                         </th:block>
