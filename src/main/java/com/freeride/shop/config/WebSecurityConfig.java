@@ -16,7 +16,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         this.userDetailsService = userDetailsService;
     }
 
-    // конфигурируем защиту запросов
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
@@ -31,7 +30,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http.exceptionHandling().accessDeniedPage("/403");
     }
 
-    // указываем, как получать пользователя
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(userDetailsService);
