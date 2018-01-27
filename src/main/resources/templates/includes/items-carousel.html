@@ -9,8 +9,8 @@
 
 <th:block th:fragment="list-carousel">
 
-    <div class="carousel-item" th:id="${item.id}" th:classappend="${itr.index==0}?'active'">
-        <div class="pl-2 pr-2" th:classappend="${cartAvailabilities}? col-md-3 : col-md-4">
+    <div class="carousel-item small-carousel" th:id="${item.id}" th:classappend="${itr.index==0}?'active'">
+        <div class="pl-2 pr-2 " th:classappend="${cartAvailabilities}? col-md-3 : col-md-4">
             <!--Item body-->
             <div class="card text-center h-100">
                 <a th:href="@{|/items/show/${item.id}|}">
