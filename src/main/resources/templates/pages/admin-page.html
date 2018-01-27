@@ -39,17 +39,12 @@
 
         <!-- Page Content -->
         <div class="container">
-
             <div class="row">
-
                 <div class="col-lg-3">
-
                     <!--Admin panel-->
                     <th:block th:include="includes/admin/admin-panel :: admin-nav"/>
-
                 </div>
                 <!-- /.col-lg-3 -->
-
                 <div class="col-lg-9">
 
                     <div class="row" style="padding-top: 30px">
@@ -77,16 +72,12 @@
 
                         <th:block th:if="${allComments}"
                                   th:include="includes/admin/admin-comments :: admin-comments"/>
-
                     </div>
                     <!-- /.row -->
-
                 </div>
                 <!-- /.col-lg-9 -->
-
             </div>
             <!-- /.row -->
-
             <!--Pagination include-->
             <th:block th:if="${name}" th:include="includes/admin/admin-items-pagination :: admin-pagination"/>
             <th:block th:unless="${name}">
@@ -101,7 +92,6 @@
         <th:block th:include="includes/footer :: main-footer"/>
     </div>
 </div>
-
 
 <!-- Bootstrap core JavaScript -->
 <script th:src="@{/js/jquery.js}"></script>

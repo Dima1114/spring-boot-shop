@@ -30,11 +30,6 @@ public class UserController {
         return "pages/login";
     }
 
-    @RequestMapping("/403")
-    public String error403() {
-        return "pages/403";
-    }
-
     @GetMapping("/registration")
     public String getRegistrationForm(Model model) {
         model.addAttribute("registrationForm", new RegistrationDto());
