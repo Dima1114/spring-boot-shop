@@ -12,7 +12,6 @@ import java.util.stream.Collectors;
 public class ProfileDto {
 
     private Long id;
-
     private String password;
 
     @StrongPassword(min = 6, max = 20, nullanle = true, message = "{StrongPassword.validation}")
