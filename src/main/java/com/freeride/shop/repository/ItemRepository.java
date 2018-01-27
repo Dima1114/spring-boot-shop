@@ -16,7 +16,10 @@ public interface ItemRepository extends JpaRepository<Item, Long> {
     Page<Item> findAllByIdInAndCategory_NameContainingAndNameContainingAndBrand_NameInAndPriceBetween(
            List<Long> itemIds, String category, String name, List<String> brands,
            BigDecimal minPrice, BigDecimal maxPrice, Pageable pageable);
-    Page<Item> findAllByName(String name, Pageable pageable);
+
+    Page<Item> findAllByNameContaining(String name, Pageable pageable);
+
+    //    Page<Item> findAllByName(String name, Pageable pageable);
     List<Item> findAllByCategory_Id(Long categoryId);
     List<Item> findAllByBrand_Id(Long brandId);
 }

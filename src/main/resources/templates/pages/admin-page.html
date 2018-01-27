@@ -88,8 +88,10 @@
             <!-- /.row -->
 
             <!--Pagination include-->
-            <th:block th:if="${items} OR ${allComments}" th:include="includes/pagination :: main-pagination"/>
-
+            <th:block th:if="${name}" th:include="includes/admin/admin-items-pagination :: admin-pagination"/>
+            <th:block th:unless="${name}">
+                <th:block th:if="${items} OR ${allComments}" th:include="includes/pagination :: main-pagination"/>
+            </th:block>
         </div>
         <!-- /.container -->
     </div>

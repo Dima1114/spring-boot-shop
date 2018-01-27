@@ -12,15 +12,11 @@ public interface CartService {
     void addItem(CartDto cartDto);
     void removeItem(Long availId);
     List<ItemAvailability> listAvailabilities();
-
-    //    List<Item> listCartItems();
     BigDecimal getCartTotal();
+    List<ItemAvailability> listAvailabilities(User user);
+    BigDecimal getCartTotal(User user);
 
     //admin
     void removeItem(Long availId, User user);
-    List<ItemAvailability> listAvailabilities(User user);
-
-    //    List<Item> listCartItems(User user);
-    BigDecimal getCartTotal(User user);
 
 }

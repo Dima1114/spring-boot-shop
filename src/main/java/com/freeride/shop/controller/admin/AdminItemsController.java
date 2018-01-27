@@ -43,6 +43,19 @@ public class AdminItemsController {
         return "pages/admin-page";
     }
 
+    @GetMapping("/filter")
+    public String showFilteredItems(Model model, @RequestParam(name = "page", defaultValue = "1") int page,
+                                    @RequestParam(name = "name", defaultValue = "") String name) {
+
+        Page<Item> items = itemService.adminSearchResults(name, page);
+
+        model.addAttribute("items", items.getContent());
+        model.addAttribute("page", page);
+        model.addAttribute("name", name);
+        model.addAttribute("totalPages", items.getTotalPages());
+        return "pages/admin-page";
+    }
+
     @GetMapping("/edit/{itemId}")
     public String itemEditForm(Model model, @PathVariable Long itemId) {
         Item item = itemService.getItem(itemId);

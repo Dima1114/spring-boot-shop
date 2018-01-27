@@ -10,10 +10,9 @@ public interface CategoryService {
     List<Category> list();
     Category getCategory(String name);
     Category getCategory(Long id);
-
     void saveCategory(CategoryDto categoryDto);
-
-    void deleteCategory(Long categoryId);
-
     long countCategories();
+
+    //admin
+    void deleteCategory(Long categoryId);
 }

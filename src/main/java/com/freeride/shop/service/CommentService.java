@@ -10,12 +10,10 @@ import java.util.List;
 public interface CommentService {
 
     List<Comment> getItemsComments(Item item);
-
     List<Comment> getRecentlyAdded();
-
     Page<Comment> getAllComments(int page);
-
     void addComment(CommentDto commentDto);
 
+    //admin
     void deleteComment(Long commentId);
 }

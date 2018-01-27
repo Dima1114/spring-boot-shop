@@ -7,6 +7,10 @@
 <body>
 
 <th:block th:fragment="admin-items">
+
+    <!--include form for search by name-->
+    <th:block th:include="includes/forms/admin-sorting-form :: admin-sorting"/>
+
     <div class="col-12 pt-2 mb-4" style="background-color: #fff">
 
         <th:block th:each="item : ${items}">

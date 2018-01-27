@@ -7,9 +7,7 @@ import java.util.List;
 public interface SizeService {
 
     List<Size> getSizes();
-
     List<Size> getTypeSizes(String type);
     List<String> getTypes();
-
     Size getSize(String name);
 }

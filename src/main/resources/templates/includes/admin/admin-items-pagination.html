@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+>
+<head>
+    <meta charset="UTF-8"/>
+</head>
+<body>
+<th:block th:fragment="admin-pagination">
+
+    <div class="d-flex justify-content-center">
+        <nav aria-label="Page navigation">
+            <ul class="pagination">
+
+                <th:block th:each="currentPage : ${#numbers.sequence(1, totalPages)}">
+                    <li class="page-item" th:classappend="${currentPage == page} ? active">
+                        <a class="page-link" th:href="@{|?name=${name}&amp;page=${currentPage}|}"
+                           th:text="${currentPage}"></a>
+                    </li>
+                </th:block>
+            </ul>
+        </nav>
+    </div>
+
+</th:block>
+
+</body>
+</html>

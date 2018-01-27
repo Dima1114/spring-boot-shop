@@ -102,6 +102,13 @@ public class ItemServiceImpl implements ItemService {
     }
 
     @Override
+    public Page<Item> adminSearchResults(String name, int page) {
+        Pageable pageable = new PageRequest(page - 1, 3,
+                new Sort(Sort.Direction.DESC, "arrivalDate"));
+        return itemRepository.findAllByNameContaining(name, pageable);
+    }
+
+    @Override
     public Item getItem(Long id) {
         return itemRepository.findOne(id);
     }
