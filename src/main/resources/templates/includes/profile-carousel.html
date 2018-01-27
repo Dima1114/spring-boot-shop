@@ -17,9 +17,6 @@
         <div class="carousel slide" id="myCarousel"
              th:attrappend="data-ride=${cartAvailabilities.size()&gt; 4}?'carousel'" data-interval="5000">
             <div class="carousel-inner">
-
-                <!-- The first item is Active-->
-                <!--All other items are not active-->
                 <th:block th:each="availability,itr : ${cartAvailabilities}" th:with="item=${availability.getItem()}">
                     <th:block th:include="includes/items-carousel :: list-carousel"/>
                 </th:block>

@@ -30,25 +30,15 @@
                     </div>
                     <h5 th:text="|$ ${item.price}|"></h5>
                     <p class="card-text" th:text="${#strings.abbreviate(item.description,30)}"></p>
-
-                    <!--<div class="btn-group" sec:authorize="isAuthenticated()">-->
-                    <!--<button class="btn btn-primary" th:text="'To Cart'"-->
-                    <!--th:onclick="|addToCart(${item.id})|"></button>-->
-                    <!--<button class="btn btn-success" th:text="'Order Now'"></button>-->
-                    <!--</div>-->
                 </div>
                 <div class="card-footer">
                     <small class="text-muted"
                            th:text="|&#9733; &#9733; &#9733; &#9733; &#9734; ${item.rating} Stars|"></small>
                 </div>
-
             </div>
         </div>
-
     </th:block>
-
 </th:block>
-
 
 </body>
 </html>

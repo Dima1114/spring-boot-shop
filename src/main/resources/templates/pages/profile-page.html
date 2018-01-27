@@ -27,28 +27,18 @@
 
 <!-- Page Content -->
 <div class="container">
-
-    <!-- Portfolio Item Heading -->
-    <!--<h1 class="mt-4 col-4 offset-3" th:text="|Profile|"></h1>-->
-
-    <!-- Portfolio Item Row -->
     <div class="row">
-
         <th:block th:include="includes/forms/profile-form :: profile-form"/>
-
     </div>
     <!-- /.row -->
-
     <!-- Cart Items -->
     <h3 class="my-4 pl-5" th:text="'Your Cart'"></h3>
     <span id="itemsInRow" style="display: none" th:text="4"></span>
 
     <th:block th:include="includes/profile-carousel :: profile-carousel"/>
     <!-- /.row -->
-
 </div>
 <!-- /.container -->
-
 <!-- Footer -->
 <th:block th:include="includes/footer :: main-footer"/>
 

@@ -7,7 +7,6 @@
 <body>
 
 <th:block th:fragment="brand-form">
-
     <div class="col-12 mt-5 rounded" style="background-color: #fff">
         <h3 th:text="'Brand form'" class="text-center pt-3"></h3>
         <form method="post" th:action="@{/admin/brands/add}" th:object="${brandForm}">
@@ -55,8 +54,6 @@
             </div>
         </form>
     </div>
-
-
 </th:block>
 
 </body>

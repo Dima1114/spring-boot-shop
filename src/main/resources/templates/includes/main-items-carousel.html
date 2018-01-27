@@ -9,21 +9,16 @@
 
 <th:block th:fragment="main-items-carousel">
 
-    <div class="my-3 float-right" id="cart-controllers">
-
-    </div>
+    <!--<div class="my-3 float-right" id="cart-controllers">-->
+    <!---->
+    <!--</div>-->
 
     <div class="col-md-12 mb-4">
         <div class="carousel slide" id="myCarousel" data-ride="carousel">
             <div class="carousel-inner">
-
-                <!-- The first item is Active-->
-                <!--All other items are not active-->
                 <th:block th:each="item,itr : ${items}">
-                    <th:block th:include="includes/items-carousel :: list-carousel"></th:block>
+                    <th:block th:include="includes/items-carousel :: list-carousel"/>
                 </th:block>
-
-
             </div>
             <a class="carousel-control-prev btn btn-secondary" style="width:4%;margin-left:-4%" href="#myCarousel"
                role="button" data-slide="prev">
@@ -35,7 +30,6 @@
             </a>
         </div>
     </div>
-
 
 </th:block>
 

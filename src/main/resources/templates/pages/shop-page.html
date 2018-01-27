@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org"
->
+      xmlns:th="http://www.thymeleaf.org">
 
 <head>
 
@@ -28,41 +27,28 @@
 
 <!-- Page Content -->
 <div class="container">
-
     <div class="row">
-
         <div class="col-lg-3">
-
             <!--Categories-->
             <th:block th:include="includes/categories :: main-categories"/>
-
             <!--Sorter-->
             <th:block th:include="includes/forms/sorting-form :: sorting"/>
         </div>
         <!-- /.col-lg-3 -->
-
         <div class="col-lg-9">
-
             <div class="row" style="padding-top: 30px">
-
                 <!--All products-->
                 <th:block th:include="includes/item :: list-items"/>
-
             </div>
             <!-- /.row -->
-
         </div>
         <!-- /.col-lg-9 -->
-
     </div>
     <!-- /.row -->
-
     <!--Pagination include-->
     <th:block th:include="includes/pagination :: main-pagination"/>
-
 </div>
 <!-- /.container -->
-
 <!-- Footer -->
 <th:block th:include="includes/footer :: main-footer"/>
 
