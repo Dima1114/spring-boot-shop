@@ -20,15 +20,13 @@
     <div class="content">
         <!-- Navigation -->
         <th:block th:include="includes/navigation :: main-nav"/>
-        <!-- Page Content -->
-        <div class="container" id="form-container">
 
-            <div class="row">
-                <div>
-                    <h1 th:text="'Sorry, you can not wisit this page'"></h1>
-                    <h2 th:text="'You have no authorities'"></h2>
+        <div class="container">
+            <div class="row justify-content-center mt-5">
+                <div class="rounded p-4 text-center" style="background-color: #fff">
+                    <h1 class="display-3" th:text="'Sorry, you can not wisit this page'"></h1>
+                    <h1 class="display-4" th:text="'You have no authorities'"></h1>
                 </div>
-
             </div>
         </div>
     </div>

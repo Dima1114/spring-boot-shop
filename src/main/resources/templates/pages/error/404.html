@@ -21,16 +21,13 @@
         <!-- Navigation -->
         <th:block th:include="includes/navigation :: main-nav"/>
 
-        <!-- Page Content -->
-        <div class="container" id="form-container">
-
-            <div class="row">
-                <div>
-                    <h1 th:text="'404'"></h1>
-                    <h3 th:text="'Sorry, cannot find page'"></h3>
-
+        <div class="container">
+            <div class="row justify-content-center mt-5">
+                <div class="rounded p-4 text-center" style="background-color: #fff">
+                    <h1 class="display-1" th:text="'Ooops!'"></h1>
+                    <h1 class="display-3" th:text="'404 Not Found'"></h1>
+                    <h1 th:text="'Sorry, Requested page not found!'"></h1>
                 </div>
-
             </div>
         </div>
     </div>

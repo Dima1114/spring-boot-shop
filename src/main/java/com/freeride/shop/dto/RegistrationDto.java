@@ -17,7 +17,7 @@ public class RegistrationDto {
     @StrongPassword(min = 6, max = 20, message = "{StrongPassword.validation}")
     private String password;
 
-    @Email(regexp = ".{1,16}@.{1,12}\\..{2,4}")
+    @Email(regexp = ".{1,25}@.{1,15}\\..{2,4}")
     private String email;
 
     public String getLogin() {

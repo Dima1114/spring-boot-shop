@@ -8,8 +8,11 @@
 
 <th:block th:fragment="profile-carousel" th:with="cartTotal=${0}">
 
-    <th:block th:if="${cartAvailabilities.isEmpty()}" >
-        <h1 class="pl-5" th:text="'Cart is empty'" style="color: red"></h1>
+    <th:block th:if="${cartAvailabilities.isEmpty()}">
+        <div class="row">
+            <h1 class="pl-5 pr-5" th:text="'Cart is empty'" style="color: red"></h1>
+            <a class="btn btn-primary btn-lg" th:text="'Go Shopping'" th:href="@{/items/all}"></a>
+        </div>
     </th:block>
 
 

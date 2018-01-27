@@ -11,6 +11,7 @@
     <link th:href="@{/css/mdb.min.css}" rel="stylesheet"/>
 
     <link th:href="@{/css/background.css}" rel="stylesheet"/>
+    <link th:href="@{/css/login.css}" rel="stylesheet"/>
     <link th:href="@{/css/profileCarouselOverride.css}" rel="stylesheet"/>
 
     <style>
@@ -21,26 +22,27 @@
 
 </head>
 <body>
+<div class="wrapper">
+    <div class="content">
+        <!-- Navigation -->
+        <th:block th:include="includes/navigation :: main-nav"/>
 
-<!-- Navigation -->
-<th:block th:include="includes/navigation :: main-nav"/>
+        <div class="container">
+            <div class="row">
+                <th:block th:include="includes/forms/profile-form :: profile-form"/>
+            </div>
+            <!-- Cart Items -->
+            <h3 class="my-4 pl-5" th:text="'Your Cart'"></h3>
+            <span id="itemsInRow" style="display: none" th:text="4"></span>
 
-<!-- Page Content -->
-<div class="container">
-    <div class="row">
-        <th:block th:include="includes/forms/profile-form :: profile-form"/>
+            <th:block th:include="includes/profile-carousel :: profile-carousel"/>
+        </div>
     </div>
-    <!-- /.row -->
-    <!-- Cart Items -->
-    <h3 class="my-4 pl-5" th:text="'Your Cart'"></h3>
-    <span id="itemsInRow" style="display: none" th:text="4"></span>
-
-    <th:block th:include="includes/profile-carousel :: profile-carousel"/>
-    <!-- /.row -->
+    <div class="footer">
+        <!-- Footer -->
+        <th:block th:include="includes/footer :: main-footer"/>
+    </div>
 </div>
-<!-- /.container -->
-<!-- Footer -->
-<th:block th:include="includes/footer :: main-footer"/>
 
 <!-- Bootstrap core JavaScript -->
 <script th:src="@{/js/jquery.js}"></script>
